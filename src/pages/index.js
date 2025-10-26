@@ -163,7 +163,11 @@ const IndexPage = () => {
 
       {/* Email Discount Popup */}
       <Modal visible={showEmailPopup} close={handleClosePopup}>
-        <EmailPopup onClose={handleClosePopup} onSubmit={handleEmailSubmit} />
+        <EmailPopup 
+          onClose={handleClosePopup} 
+          onSubmit={handleEmailSubmit}
+          redirectUrl="https://sydneyfn.netlify.app/blog/"
+        />
       </Modal>
     </Layout>
   );
