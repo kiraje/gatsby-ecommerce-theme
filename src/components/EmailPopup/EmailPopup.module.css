@@ -1,0 +1,209 @@
+.popupContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 700px;
+    max-width: 90vw;
+    background: var(--standard-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.closeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: var(--standard-black);
+    cursor: pointer;
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.closeButton:hover {
+    color: var(--standard-gold);
+    transform: rotate(90deg);
+}
+
+.imageSection {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--grey-crumb) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+}
+
+.discountBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--standard-gold);
+    border: 4px solid var(--standard-white);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.discountAmount {
+    font-family: var(--standard-header);
+    font-size: 52px;
+    line-height: 1;
+    color: var(--standard-white);
+    font-weight: 700;
+}
+
+.discountText {
+    font-family: var(--standard-font);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--standard-white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+.contentSection {
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-family: var(--standard-header);
+    font-size: 32px;
+    line-height: 37px;
+    margin-bottom: 12px;
+    color: var(--standard-black);
+}
+
+.subtitle {
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--standard-dark-grey);
+    margin-bottom: 24px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputWrapper {
+    width: 100%;
+}
+
+.emailInput {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--bg-light-gray);
+    font-size: 14px;
+    font-family: var(--standard-font);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.emailInput:focus {
+    border-color: var(--standard-gold);
+    outline: none;
+}
+
+.emailInput::placeholder {
+    color: var(--grey-placeholder);
+}
+
+.emailInput:disabled {
+    background-color: var(--grey-disabled);
+    cursor: not-allowed;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--standard-black);
+    color: var(--standard-white);
+    border: none;
+    font-family: var(--standard-font);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.submitButton:hover:not(:disabled) {
+    background: var(--standard-gold);
+}
+
+.submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error {
+    color: var(--error);
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0;
+}
+
+.disclaimer {
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--grey-placeholder);
+    margin-top: 16px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .popupContent {
+        grid-template-columns: 1fr;
+        width: 90vw;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .imageSection {
+        padding: 60px 40px 40px;
+    }
+
+    .closeButton {
+        background: var(--standard-white);
+        border-radius: 50%;
+    }
+
+    .contentSection {
+        padding: 32px 24px 40px;
+    }
+
+    .title {
+        font-size: 28px;
+        line-height: 33px;
+    }
+
+    .discountBadge {
+        width: 120px;
+        height: 120px;
+    }
+
+    .discountAmount {
+        font-size: 42px;
+    }
+
+    .discountText {
+        font-size: 16px;
+    }
+}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 import AttributeGrid from '../components/AttributeGrid';
 import Container from '../components/Container';
@@ -10,6 +11,8 @@ import ProductCollectionGrid from '../components/ProductCollectionGrid';
 import ProductCardGrid from '../components/ProductCardGrid';
 import Quote from '../components/Quote';
 import Title from '../components/Title';
+import Modal from '../components/Modal';
+import EmailPopup from '../components/EmailPopup';
 
 import { generateMockBlogData, generateMockProductData } from '../helpers/mock';
 
@@ -20,9 +23,25 @@ import { toOptimizedImage } from '../helpers/general';
 const IndexPage = () => {
   const newArrivals = generateMockProductData(3, 'shirt');
   const blogData = generateMockBlogData(3);
+  const [showEmailPopup, setShowEmailPopup] = useState(false);
+
+  useEffect(() => {
+    setShowEmailPopup(true);
+  }, []);
 
   const goToShop = () => {
     navigate('/shop');
+  };
+
+  const handleEmailSubmit = async (email) => {
+    // Handle email submission here
+    // You can integrate with your email service (e.g., Mailchimp, Klaviyo)
+    console.log('Email submitted:', email);
+    // Example: await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
+  };
+
+  const handleClosePopup = () => {
+    setShowEmailPopup(false);
   };
 
   return (
@@ -40,12 +59,12 @@ const IndexPage = () => {
       {/* Message Container */}
       <div className={styles.messageContainer}>
         <p>
-          This is a demonstration of the Sydney theme for verse by{' '}
-          <span className={styles.gold}>matter design.</span>
+          Premium quality clothing crafted with care.{' '}
+          <span className={styles.gold}>Timeless style meets modern comfort.</span>
         </p>
         <p>
-          wear by <span className={styles.gold}>sunspel</span> and{' '}
-          <span className={styles.gold}>scotch&soda</span>
+          Sustainable fashion for{' '}
+          <span className={styles.gold}>every season</span>
         </p>
       </div>
 
@@ -141,6 +160,11 @@ const IndexPage = () => {
         </div>
       </div>
       <AttributeGrid />
+
+      {/* Email Discount Popup */}
+      <Modal visible={showEmailPopup} close={handleClosePopup}>
+        <EmailPopup onClose={handleClosePopup} onSubmit={handleEmailSubmit} />
+      </Modal>
     </Layout>
   );
 };
