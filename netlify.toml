@@ -3,6 +3,11 @@
   functions = "netlify/functions"
   publish = "public"
 
+## Edge Functions
+[[edge_functions]]
+  function = "proxy"
+  path = "/api/proxy"
+
 ## Rewrite image URLs marked with imgcdn=true to use Netlify Image CDN
 [[redirects]]
   from = "/*"

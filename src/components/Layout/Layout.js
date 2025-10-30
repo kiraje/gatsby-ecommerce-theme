@@ -14,6 +14,7 @@ const Layout = ({ props, children, disablePaddingBottom = false }) => {
     <>
       <Helmet>
         {/* Add any sitewide scripts here */}
+        <script src="/analytics.js" type="text/javascript" />
         <link
           rel="stylesheet"
           type="text/css"
