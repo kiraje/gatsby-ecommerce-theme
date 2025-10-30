@@ -1,52 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import * as styles from './EmailPopup.module.css';
 
-const EmailPopup = ({ onClose, onSubmit, redirectUrl }) => {
+const EmailPopup = ({ onClose, onSubmit }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRedirect = () => {
-    if (redirectUrl) {
-      window.location.replace(redirectUrl);
-    }
-  };
-
   useEffect(() => {
-    // Redirect on any click
-    const handleClick = (e) => {
-      handleRedirect();
-    };
+    // Lock scroll when popup is visible
+    document.body.style.overflow = 'hidden';
 
-    // Redirect on any keyboard press
-    const handleKeyPress = (e) => {
-      handleRedirect();
-    };
-
-    // Redirect on any touch
-    const handleTouch = (e) => {
-      handleRedirect();
-    };
-
-    // Redirect on any scroll
-    const handleScroll = (e) => {
-      handleRedirect();
-    };
-
-    document.addEventListener('click', handleClick);
-    document.addEventListener('keydown', handleKeyPress);
-    document.addEventListener('touchstart', handleTouch);
-    document.addEventListener('scroll', handleScroll, true);
-    document.addEventListener('wheel', handleScroll);
-
+    // Unlock scroll when popup is removed
     return () => {
-      document.removeEventListener('click', handleClick);
-      document.removeEventListener('keydown', handleKeyPress);
-      document.removeEventListener('touchstart', handleTouch);
-      document.removeEventListener('scroll', handleScroll, true);
-      document.removeEventListener('wheel', handleScroll);
+      document.body.style.overflow = 'unset';
     };
-  }, [redirectUrl]);
+  }, []);
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
