@@ -6,16 +6,6 @@ const EmailPopup = ({ onClose, onSubmit }) => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    // Lock scroll when popup is visible
-    document.body.style.overflow = 'hidden';
-
-    // Unlock scroll when popup is removed
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);

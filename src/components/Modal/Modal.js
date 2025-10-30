@@ -7,6 +7,17 @@ const Modal = ({ children, visible, close }) => {
     return () => window.removeEventListener('keydown', close);
   }, [close]);
 
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [visible]);
+
   return (
     <div
       className={`${styles.root} ${
